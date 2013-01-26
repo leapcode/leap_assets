@@ -70,7 +70,8 @@ svg_to_png = [
   ['svg/status/light/*.svg',        status_light_icon_target],
   ['svg/qt/dark/*.svg',             qt_dark_icon_target],
   ['svg/qt/light/*.svg',            qt_light_icon_target],
-  ['svg/android/leap-launcher.svg', {:size => 128, :dest => 'mac/leap-128x128.png'}]
+  ['svg/android/leap-launcher.svg', {:size => 128, :dest => 'mac/leap-128x128.png'}],
+  ['svg/kid-jumping.svg', {:width => 128, :dest => 'qt/leap-small.png'}]
 ]
 
 png_to_icns = [
@@ -104,8 +105,9 @@ def render_svg_to_png(source, targets)
         height = target[:height]
         width = target[:width]
       end
-      options = ["--file=#{src_file}", "--export-png=#{dest_file}", "-w #{width}", "-h #{height}",
-        "--export-background=0xffffff", "--export-background-opacity=0x00"]
+      options = ["--file=#{src_file}", "--export-png=#{dest_file}", "--export-background=0xffffff", "--export-background-opacity=0x00"]
+      options << "-w #{width}" if width
+      options << "-h #{height}" if height
       options << "--export-dpi=#{target[:dpi]}" if target[:dpi]
       run("inkscape #{options.join ' '}")
       run("optipng #{dest_file}")
