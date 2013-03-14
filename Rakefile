@@ -21,7 +21,8 @@ output_directories = [
   'qt/dark/64',
   'qt/light/16',
   'qt/light/32',
-  'qt/light/64'
+  'qt/light/64',
+  'web'
 ]
 
 android_launcher_target = [
@@ -71,7 +72,8 @@ svg_to_png = [
   ['svg/qt/dark/*.svg',             qt_dark_icon_target],
   ['svg/qt/light/*.svg',            qt_light_icon_target],
   ['svg/android/leap-launcher.svg', {:size => 128, :dest => 'mac/leap-128x128.png'}],
-  ['svg/kid-jumping.svg', {:width => 128, :dest => 'qt/leap-small.png'}]
+  ['svg/kid-jumping.svg',           {:width => 128, :dest => 'qt/leap-small.png'}],
+  ['svg/kid-jumping-bw.svg',        {:size => 16, :dest => 'web/favicon.png'}]
 ]
 
 png_to_icns = [
@@ -94,24 +96,26 @@ end
 def render_svg_to_png(source, targets)
   Dir.glob(source).each do |src_file|
     [targets].flatten.each do |target|
-      dest_file = if File.directory?(target[:dest])
-        File.join(target[:dest], File.basename(src_file).sub(/\.svg$/,'.png'))
+      if File.directory?(target[:dest])
+        dest_file = File.join(target[:dest], File.basename(src_file).sub(/\.svg$/,'.png'))
       else
-        target[:dest]
+        dest_file = target[:dest]
       end
-      if target[:size]
-        height = width = target[:size]
-      else
-        height = target[:height]
-        width = target[:width]
+      if !File.exists?(dest_file) || File.mtime(dest_file) < File.mtime(src_file)
+        if target[:size]
+          height = width = target[:size]
+        else
+          height = target[:height]
+          width = target[:width]
+        end
+        options = ["--file=#{src_file}", "--export-png=#{dest_file}", "--export-background=0xffffff", "--export-background-opacity=0x00"]
+        options << "-w #{width}" if width
+        options << "-h #{height}" if height
+        options << "--export-dpi=#{target[:dpi]}" if target[:dpi]
+        run("inkscape #{options.join ' '}")
+        run("optipng #{dest_file}")
+        progress
       end
-      options = ["--file=#{src_file}", "--export-png=#{dest_file}", "--export-background=0xffffff", "--export-background-opacity=0x00"]
-      options << "-w #{width}" if width
-      options << "-h #{height}" if height
-      options << "--export-dpi=#{target[:dpi]}" if target[:dpi]
-      run("inkscape #{options.join ' '}")
-      run("optipng #{dest_file}")
-      progress
     end
   end
 end
@@ -134,14 +138,11 @@ require 'fileutils'
 
 task :default => :render
 
-desc "render SVG images to PNGs"
+desc "render SVG images"
 task :render do
   Dir.chdir(File.dirname(__FILE__)) do
     output_directories.each do |dir|
       FileUtils.mkdir_p(dir)
-      Dir.entries(dir).grep(/\.(png|icns|jpg)$/).each do |file|
-        File.unlink File.join(dir,file)
-      end
     end
     svg_to_png.each do |source, targets|
       render_svg_to_png(source, targets)
@@ -152,3 +153,15 @@ task :render do
   end
   puts
 end
+
+desc "clean out rendered images"
+task :clean do
+  Dir.chdir(File.dirname(__FILE__)) do
+    output_directories.each do |dir|
+      Dir.entries(dir).grep(/\.(png|icns|jpg)$/).each do |file|
+        File.unlink File.join(dir,file)
+      end
+    end
+  end
+end
+
