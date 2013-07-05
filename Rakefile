@@ -66,6 +66,7 @@ qt_light_icon_target = [
 svg_to_png = [
   ['svg/android/leap-launcher.svg', android_launcher_target],
   ['svg/android/leap-launcher.svg', {:size => 512, :dest => 'android/leap-icon.png'}],
+  ['svg/kid-jumping-silhouette-light.svg', android_launcher_target],
   ['svg/android/leap-debug-launcher.svg', android_launcher_target],
   ['svg/android/leap-debug-launcher.svg', {:size => 512, :dest => 'android/leap-debug-icon.png'}],
   ['svg/android/icons/*.svg',       android_icon_target],
