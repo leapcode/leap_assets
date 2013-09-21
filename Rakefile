@@ -10,18 +10,17 @@ output_directories = [
   'android/res/drawable-hdpi',
   'android/res/drawable-xhdpi',
   'mac',
-  'status/dark/16',
-  'status/dark/32',
-  'status/dark/64',
-  'status/light/16',
-  'status/light/32',
-  'status/light/64',
-  'qt/dark/16',
-  'qt/dark/32',
-  'qt/dark/64',
-  'qt/light/16',
-  'qt/light/32',
-  'qt/light/64',
+  'icons',
+  'icons/white',
+  'icons/black',
+  'icons/white/16',
+  'icons/white/24',
+  'icons/white/32',
+  'icons/white/64',
+  'icons/black/16',
+  'icons/black/24',
+  'icons/black/32',
+  'icons/black/64',
   'web'
 ]
 
@@ -39,57 +38,48 @@ android_icon_target = [
   {:size => 48, :dpi => 320, :dest => 'android/res/drawable-xhdpi'}
 ]
 
-status_dark_icon_target = [
-  {:size => 16, :dest => 'status/dark/16'},
-  {:size => 32, :dest => 'status/dark/32'},
-  {:size => 64, :dest => 'status/dark/64'}
+white_icon_target = [
+  {:size => 16, :dest => 'icons/white/16'},
+  {:size => 24, :dest => 'icons/white/24'},
+  {:size => 32, :dest => 'icons/white/32'},
+  {:size => 64, :dest => 'icons/white/64'}
 ]
 
-status_light_icon_target = [
-  {:size => 16, :dest => 'status/light/16'},
-  {:size => 32, :dest => 'status/light/32'},
-  {:size => 64, :dest => 'status/light/64'}
-]
-
-qt_dark_icon_target = [
-  {:size => 16, :dest => 'qt/dark/16'},
-  {:size => 32, :dest => 'qt/dark/32'},
-  {:size => 64, :dest => 'qt/dark/64'}
-]
-
-qt_light_icon_target = [
-  {:size => 16, :dest => 'qt/light/16'},
-  {:size => 32, :dest => 'qt/light/32'},
-  {:size => 64, :dest => 'qt/light/64'}
+black_icon_target = [
+  {:size => 16, :dest => 'icons/black/16'},
+  {:size => 24, :dest => 'icons/black/24'},
+  {:size => 32, :dest => 'icons/black/32'},
+  {:size => 64, :dest => 'icons/black/64'}
 ]
 
 svg_to_png = [
-
+  # icons
+  ['svg/icons/white/*.svg',         white_icon_target],
+  ['svg/icons/black/*.svg',         black_icon_target],
+  ['svg/kid-jumping.svg',           {:width => 128, :dest => 'icons/leap-small.png'}],
+  
+  # android
+  ['svg/android/icons/*.svg',       android_icon_target],
   ['svg/android/leap-launcher.svg', android_launcher_target],
   ['svg/android/leap-launcher.svg', {:size => 512, :dest => 'android/leap-icon.png'}],
   ['svg/kid-jumping-silhouette-light.svg', android_icon_target],
   ['svg/android/vpn_disconnected.svg', android_icon_target],
   ['svg/android/leap-debug-launcher.svg', android_launcher_target],
   ['svg/android/leap-debug-launcher.svg', {:size => 512, :dest => 'android/leap-debug-icon.png'}],
-  ['svg/android/leap-launcher.svg', {:size => 128, :dest => 'mac/leap-128x128.png'}],
-
   ['svg/masks/mask-launcher.svg',   android_launcher_target],
   ['svg/masks/mask-icon.svg',       {:size => 512, :dest => 'android/bitmask-icon.png'}],
+      
+  # mac
+  ['svg/android/leap-launcher.svg', {:size => 128, :dest => 'mac/leap-128x128.png'}],
   ['svg/masks/mask-launcher.svg',   {:size => 128, :dest => 'mac/bitmask-128x128.png'}],
 
-  ['svg/android/icons/*.svg',       android_icon_target],
-  ['svg/status/dark/*.svg',         status_dark_icon_target],
-  ['svg/status/light/*.svg',        status_light_icon_target],
-  ['svg/qt/dark/*.svg',             qt_dark_icon_target],
-  ['svg/qt/light/*.svg',            qt_light_icon_target],
-
-  ['svg/kid-jumping.svg',           {:width => 128, :dest => 'qt/leap-small.png'}],
+  # web  
   ['svg/kid-jumping-bw.svg',        {:size => 16, :dest => 'web/favicon.png'}],
-
   ['svg/web/*.svg',                 {:size => 32, :dest => 'web/32'}]
 ]
 
 png_to_icns = [
+  # mac
   [['mac/leap-128x128.png'], 'mac/leap.icns'],
   [['mac/bitmask-128x128.png'], 'mac/bitmask.icns']
 ]

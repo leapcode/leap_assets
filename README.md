@@ -3,6 +3,8 @@ Icons and Images for LEAP
 
 Here lies all the assets for the various LEAP clients. All sources are in SVG format, and rendered to PNG.
 
+All icons derived from either Gnome (GPL) or Font Awesome (Open Font License, GPL compatible).
+
 Generating PNG images
 ======================================
 
@@ -52,4 +54,7 @@ Launcher Icon Generator
 https://android-ui-utils.googlecode.com/hg/asset-studio/dist/icons-launcher.html
 
 Nice Symbolic Icons
-check /usr/share/icons/gnome/scalable/**-symbolic.svg
+
+  * /usr/share/icons/gnome/scalable/**-symbolic.svg
+  * http://fortawesome.github.io/Font-Awesome/
+
