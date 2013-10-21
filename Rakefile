@@ -68,6 +68,7 @@ svg_to_png = [
   ['svg/android/leap-debug-launcher.svg', {:size => 512, :dest => 'android/leap-debug-icon.png'}],
   ['svg/masks/mask-launcher.svg',   android_launcher_target],
   ['svg/masks/mask-icon.svg',       {:size => 512, :dest => 'android/bitmask-icon.png'}],
+  ['svg/android/mask-silhouette.svg',	android_icon_target],
       
   # mac
   ['svg/android/leap-launcher.svg', {:size => 128, :dest => 'mac/leap-128x128.png'}],
