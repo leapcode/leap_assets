@@ -75,8 +75,9 @@ svg_to_png = [
   ['svg/masks/mask-launcher.svg',   {:size => 128, :dest => 'mac/bitmask-128x128.png'}],
 
   # web  
-  ['svg/kid-jumping-bw.svg',        {:size => 16, :dest => 'web/favicon.png'}],
-  ['svg/web/*.svg',                 {:size => 32, :dest => 'web/32'}]
+  ['svg/kid-jumping-bw.svg',        {:size => 16,  :dest => 'web/favicon.png'}],
+  ['svg/web/*.svg',                 {:size => 32,  :dest => 'web/32'}],
+  ['svg/masks/mask.svg',            {:width => 128, :dest => 'web/128'}]
 ]
 
 png_to_icns = [
