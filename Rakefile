@@ -21,7 +21,23 @@ output_directories = [
   'icons/black/24',
   'icons/black/32',
   'icons/black/64',
-  'web'
+  'web',
+  'linux',
+  'linux/hicolor',
+  'linux/hicolor/24x24',
+  'linux/hicolor/24x24/apps',
+  'linux/hicolor/32x32',
+  'linux/hicolor/32x32/apps',
+  'linux/hicolor/48x48',
+  'linux/hicolor/48x48/apps',
+  'linux/hicolor/64x64',
+  'linux/hicolor/64x64/apps',
+  'linux/hicolor/128x128',
+  'linux/hicolor/128x128/apps',
+  'linux/hicolor/256x256',
+  'linux/hicolor/256x256/apps',
+  'linux/hicolor/scalable',
+  'linux/hicolor/scalable/apps'
 ]
 
 android_launcher_target = [
@@ -52,6 +68,15 @@ black_icon_target = [
   {:size => 64, :dest => 'icons/black/64'}
 ]
 
+linux_target = [
+  {:size => 24, :dest => 'linux/hicolor/24x24/apps'},
+  {:size => 32, :dest => 'linux/hicolor/32x32/apps'},
+  {:size => 48, :dest => 'linux/hicolor/48x48/apps'},
+  {:size => 64, :dest => 'linux/hicolor/64x64/apps'},
+  {:size => 128, :dest => 'linux/hicolor/128x128/apps'},
+  {:size => 256, :dest => 'linux/hicolor/256x256/apps'}
+]
+
 svg_to_png = [
   # icons
   ['svg/icons/white/*.svg',         white_icon_target],
@@ -77,7 +102,10 @@ svg_to_png = [
   # web  
   ['svg/kid-jumping-bw.svg',        {:size => 16,  :dest => 'web/favicon.png'}],
   ['svg/web/*.svg',                 {:size => 32,  :dest => 'web/32'}],
-  ['svg/masks/mask.svg',            {:width => 128, :dest => 'web/128'}]
+  ['svg/masks/mask.svg',            {:width => 128, :dest => 'web/128'}],
+  
+  # linux
+  ['svg/masks/mask-launcher.svg',   linux_target]
 ]
 
 png_to_icns = [
