@@ -69,12 +69,12 @@ black_icon_target = [
 ]
 
 linux_target = [
-  {:size => 24, :dest => 'linux/hicolor/24x24/apps'},
-  {:size => 32, :dest => 'linux/hicolor/32x32/apps'},
-  {:size => 48, :dest => 'linux/hicolor/48x48/apps'},
-  {:size => 64, :dest => 'linux/hicolor/64x64/apps'},
-  {:size => 128, :dest => 'linux/hicolor/128x128/apps'},
-  {:size => 256, :dest => 'linux/hicolor/256x256/apps'}
+  {:size => 24, :dest => 'linux/hicolor/24x24/apps/bitmask.png'},
+  {:size => 32, :dest => 'linux/hicolor/32x32/apps/bitmask.png'},
+  {:size => 48, :dest => 'linux/hicolor/48x48/apps/bitmask.png'},
+  {:size => 64, :dest => 'linux/hicolor/64x64/apps/bitmask.png'},
+  {:size => 128, :dest => 'linux/hicolor/128x128/apps/bitmask.png'},
+  {:size => 256, :dest => 'linux/hicolor/256x256/apps/bitmask.png'}
 ]
 
 svg_to_png = [
