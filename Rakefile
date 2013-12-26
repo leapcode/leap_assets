@@ -105,7 +105,10 @@ svg_to_png = [
   ['svg/masks/mask.svg',            {:width => 128, :dest => 'web/128'}],
   
   # linux
-  ['svg/masks/mask-launcher.svg',   linux_target]
+  ['svg/masks/mask-launcher.svg',   linux_target],
+  
+  # print
+  ['svg/letterhead/letterhead.svg', {:width => 2400, :height => 300, :dest => 'print'}]
 ]
 
 png_to_icns = [
