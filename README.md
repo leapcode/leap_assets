@@ -10,7 +10,7 @@ Generating PNG images
 
 Requirements:
 
-    apt-get install ruby inkscape optipng icnsutils
+    apt-get install ruby inkscape optipng icnsutils graphicsmagick
 
 Usage:
 

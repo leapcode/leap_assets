@@ -77,7 +77,10 @@ linux_target = [
   {:size => 256, :dest => 'linux/hicolor/256x256/apps/bitmask.png'}
 ]
 
-svg_to_png = [
+#
+# default target filetype is png, unless otherwise specified
+#
+svg_to_raster = [
   # icons
   ['svg/icons/white/*.svg',         white_icon_target],
   ['svg/icons/black/*.svg',         black_icon_target],
@@ -98,23 +101,25 @@ svg_to_png = [
   # mac
   ['svg/android/leap-launcher.svg', {:size => 128, :dest => 'mac/leap-128x128.png'}],
   ['svg/masks/mask-launcher.svg',   {:size => 128, :dest => 'mac/bitmask-128x128.png'}],
+  ['svg/masks/mask-launcher.svg',   {:width => 32, :height => 26, :dest => 'mac/bitmask.tiff'}],
 
   # web  
   ['svg/kid-jumping-bw.svg',        {:size => 16,  :dest => 'web/favicon.png'}],
-  ['svg/web/*.svg',                 {:size => 32,  :dest => 'web/32'}],
+  ['svg/web/arrow-down.svg',        {:size => 32,  :dest => 'web/32'}],
   ['svg/masks/mask.svg',            {:width => 128, :dest => 'web/128'}],
-  
+  ['svg/web/rainbow-masthead-small.svg', {:dest => 'web/masthead'}],
+
   # linux
   ['svg/masks/mask-launcher.svg',   linux_target],
-  
+
   # print
   ['svg/letterhead/letterhead.svg', {:width => 2400, :height => 300, :dest => 'print'}]
 ]
 
 png_to_icns = [
   # mac
-  [['mac/leap-128x128.png'], 'mac/leap.icns'],
-  [['mac/bitmask-128x128.png'], 'mac/bitmask.icns']
+  ['mac/leap-128x128.png', {:dest => 'mac/leap.icns'}],
+  ['mac/bitmask-128x128.png', {:dest => 'mac/bitmask.icns'}]
 ]
 
 ##
@@ -130,7 +135,43 @@ def run(cmd)
   end
 end
 
-def render_svg_to_png(source, targets)
+def render_svg_to_raster(source, targets)
+  render_changed(source, targets) do |src_file, dest_file, target|
+    filetype = File.extname(dest_file)
+    if target[:size]
+      height = width = target[:size]
+    else
+      height = target[:height]
+      width = target[:width]
+    end
+    if filetype != '.png'
+      real_dest_file = dest_file
+      dest_file = dest_file.sub(/#{filetype}$/, '-tmp.png')
+    end
+    options = ["--file=#{src_file}", "--export-png=#{dest_file}", "--export-background=0xffffff", "--export-background-opacity=0x00"]
+    options << "-w #{width}" if width
+    options << "-h #{height}" if height
+    options << "--export-dpi=#{target[:dpi]}" if target[:dpi]
+    run("inkscape #{options.join ' '}")
+    run("optipng #{dest_file}")
+    if filetype != '.png'
+      run("gm convert #{dest_file} #{real_dest_file}")
+      File.unlink(dest_file)
+    end
+  end
+end
+
+def render_png_to_icns(source, targets)
+  render_changed(source, targets) do |src_file, dest_file|
+    run("png2icns #{dest_file} #{src_file}")
+  end
+end
+
+#
+# for a source and target(s), yields (src_file, dest_file, info) for each
+# source and destination pair that needs rendering.
+#
+def render_changed(source, targets, &block)
   Dir.glob(source).each do |src_file|
     [targets].flatten.each do |target|
       if File.directory?(target[:dest])
@@ -139,27 +180,11 @@ def render_svg_to_png(source, targets)
         dest_file = target[:dest]
       end
       if !File.exists?(dest_file) || File.mtime(dest_file) < File.mtime(src_file)
-        if target[:size]
-          height = width = target[:size]
-        else
-          height = target[:height]
-          width = target[:width]
-        end
-        options = ["--file=#{src_file}", "--export-png=#{dest_file}", "--export-background=0xffffff", "--export-background-opacity=0x00"]
-        options << "-w #{width}" if width
-        options << "-h #{height}" if height
-        options << "--export-dpi=#{target[:dpi]}" if target[:dpi]
-        run("inkscape #{options.join ' '}")
-        run("optipng #{dest_file}")
+        yield src_file, dest_file, target
         progress
       end
     end
   end
-end
-
-def render_png_to_icns(sources, target)
-  run("png2icns #{target} #{sources.join(' ')}")
-  progress
 end
 
 def progress
@@ -181,14 +206,15 @@ task :render do
     output_directories.each do |dir|
       FileUtils.mkdir_p(dir)
     end
-    svg_to_png.each do |source, targets|
-      render_svg_to_png(source, targets)
+    svg_to_raster.each do |source, targets|
+      render_svg_to_raster(source, targets)
     end
-    png_to_icns.each do |sources, target|
-      render_png_to_icns(sources, target)
+    png_to_icns.each do |sources, targets|
+      render_png_to_icns(sources, targets)
     end
   end
   puts
+  puts "Done."
 end
 
 desc "clean out rendered images"
