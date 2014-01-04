@@ -22,6 +22,9 @@ output_directories = [
   'icons/black/32',
   'icons/black/64',
   'web',
+  'web/32',
+  'web/64',
+  'web/128',
   'linux',
   'linux/hicolor',
   'linux/hicolor/24x24',
@@ -105,10 +108,12 @@ svg_to_raster = [
 
   # web  
   ['svg/kid-jumping-bw.svg',        {:size => 16,  :dest => 'web/favicon.png'}],
-  ['svg/web/arrow-down.svg',        {:size => 32,  :dest => 'web/32'}],
   ['svg/masks/mask.svg',            {:width => 128, :dest => 'web/128'}],
   ['svg/web/rainbow-masthead-small.svg', {:dest => 'web/masthead'}],
-
+  ['svg/web/rainbow-masthead-centered.svg', {:dest => 'web/masthead'}],
+  ['svg/web/icons/*',               {:size => 32,  :dest => 'web/32'}],
+  ['svg/web/icons/*',               {:size => 64,  :dest => 'web/64'}],
+  
   # linux
   ['svg/masks/mask-launcher.svg',   linux_target],
 
