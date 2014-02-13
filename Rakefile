@@ -88,6 +88,7 @@ svg_to_raster = [
   ['svg/icons/white/*.svg',         white_icon_target],
   ['svg/icons/black/*.svg',         black_icon_target],
   ['svg/kid-jumping.svg',           {:width => 128, :dest => 'icons/leap-small.png'}],
+  ['svg/kid-jumping.svg',           {:width => 64, :dest => 'icons/leap64.png'}],
   
   # android
   ['svg/android/icons/*.svg',       android_icon_target],
