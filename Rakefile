@@ -112,6 +112,7 @@ svg_to_raster = [
   ['svg/masks/mask.svg',            {:width => 128, :dest => 'web/128'}],
   ['svg/web/rainbow-masthead-small.svg', {:dest => 'web/masthead'}],
   ['svg/web/rainbow-masthead-centered.svg', {:dest => 'web/masthead'}],
+  ['svg/web/rainbow-masthead-android-promo.svg', {:dest => 'web/masthead'}],
   ['svg/web/icons/*',               {:size => 32,  :dest => 'web/32'}],
   ['svg/web/icons/*',               {:size => 64,  :dest => 'web/64'}],
   
