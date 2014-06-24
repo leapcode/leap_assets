@@ -96,6 +96,7 @@ svg_to_raster = [
   ['svg/android/leap-launcher.svg', {:size => 512, :dest => 'android/leap-icon.png'}],
   ['svg/kid-jumping-silhouette-light.svg', android_icon_target],
   ['svg/android/vpn_disconnected.svg', android_icon_target],
+  ['svg/android/vpn_progress.svg',  android_icon_target],
   ['svg/android/leap-debug-launcher.svg', android_launcher_target],
   ['svg/android/leap-debug-launcher.svg', {:size => 512, :dest => 'android/leap-debug-icon.png'}],
   ['svg/masks/mask-launcher.svg',   android_launcher_target],
