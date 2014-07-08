@@ -1,0 +1,17 @@
+I used http://goqr.me/ to generate the svg files. They don't have a white border
+which means that the won't work unless displayed against a white background.
+
+The urls used here are:
+
+* https://play.google.com/store/apps/details?id=se.leap.bitmaskclient
+  this one will work for both android clients and non-android clients
+  although there is not much point to support non-android
+  
+* market://details?id=se.leap.bitmaskclient
+  will open directly in google play app
+  
+* https://dl.bitmask.net/client/android/Bitmask-Android-latest.apk
+  for directly downloading the apk
+
+
+

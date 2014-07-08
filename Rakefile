@@ -25,6 +25,7 @@ output_directories = [
   'web/32',
   'web/64',
   'web/128',
+  'web/qr',
   'linux',
   'linux/hicolor',
   'linux/hicolor/24x24',
@@ -85,49 +86,53 @@ linux_target = [
 #
 svg_to_raster = [
   # icons
-  ['svg/icons/white/*.svg',         white_icon_target],
-  ['svg/icons/black/*.svg',         black_icon_target],
-  ['svg/kid-jumping.svg',           {:width => 128, :dest => 'icons/leap-small.png'}],
-  ['svg/kid-jumping.svg',           {:width => 64, :dest => 'icons/leap64.png'}],
+  ['source/icons/white/*.svg',         white_icon_target],
+  ['source/icons/black/*.svg',         black_icon_target],
+  ['source/kid-jumping.svg',           {:width => 128, :dest => 'icons/leap-small.png'}],
+  ['source/kid-jumping.svg',           {:width => 64, :dest => 'icons/leap64.png'}],
   
   # android
-  ['svg/android/icons/*.svg',       android_icon_target],
-  ['svg/android/leap-launcher.svg', android_launcher_target],
-  ['svg/android/leap-launcher.svg', {:size => 512, :dest => 'android/leap-icon.png'}],
-  ['svg/kid-jumping-silhouette-light.svg', android_icon_target],
-  ['svg/android/vpn_disconnected.svg', android_icon_target],
-  ['svg/android/vpn_progress.svg',  android_icon_target],
-  ['svg/android/leap-debug-launcher.svg', android_launcher_target],
-  ['svg/android/leap-debug-launcher.svg', {:size => 512, :dest => 'android/leap-debug-icon.png'}],
-  ['svg/masks/mask-launcher.svg',   android_launcher_target],
-  ['svg/masks/mask-icon.svg',       {:size => 512, :dest => 'android/bitmask-icon.png'}],
-  ['svg/android/mask-silhouette.svg',	android_icon_target],
+  ['source/android/icons/*.svg',       android_icon_target],
+  ['source/android/leap-launcher.svg', android_launcher_target],
+  ['source/android/leap-launcher.svg', {:size => 512, :dest => 'android/leap-icon.png'}],
+  ['source/kid-jumping-silhouette-light.svg', android_icon_target],
+  ['source/android/vpn_disconnected.svg', android_icon_target],
+  ['source/android/vpn_progress.svg',  android_icon_target],
+  ['source/android/leap-debug-launcher.svg', android_launcher_target],
+  ['source/android/leap-debug-launcher.svg', {:size => 512, :dest => 'android/leap-debug-icon.png'}],
+  ['source/masks/mask-launcher.svg',   android_launcher_target],
+  ['source/masks/mask-icon.svg',       {:size => 512, :dest => 'android/bitmask-icon.png'}],
+  ['source/android/mask-silhouette.svg',	android_icon_target],
       
   # mac
-  ['svg/android/leap-launcher.svg', {:size => 128, :dest => 'mac/leap-128x128.png'}],
-  ['svg/masks/mask-launcher.svg',   {:size => 128, :dest => 'mac/bitmask-128x128.png'}],
-  ['svg/masks/mask-launcher.svg',   {:width => 32, :height => 26, :dest => 'mac/bitmask.tiff'}],
+  ['source/android/leap-launcher.svg', {:size => 128, :dest => 'mac/leap-128x128.png'}],
+  ['source/masks/mask-launcher.svg',   {:size => 128, :dest => 'mac/bitmask-128x128.png'}],
+  ['source/masks/mask-launcher.svg',   {:width => 32, :height => 26, :dest => 'mac/bitmask.tiff'}],
 
   # web  
-  ['svg/kid-jumping-bw.svg',        {:size => 16,  :dest => 'web/favicon.png'}],
-  ['svg/masks/mask.svg',            {:width => 128, :dest => 'web/128'}],
-  ['svg/web/rainbow-masthead-small.svg', {:dest => 'web/masthead'}],
-  ['svg/web/rainbow-masthead-centered.svg', {:dest => 'web/masthead'}],
-  ['svg/web/rainbow-masthead-android-promo.svg', {:dest => 'web/masthead'}],
-  ['svg/web/icons/*',               {:size => 32,  :dest => 'web/32'}],
-  ['svg/web/icons/*',               {:size => 64,  :dest => 'web/64'}],
+  ['source/kid-jumping-bw.svg',        {:size => 16,  :dest => 'web/favicon.png'}],
+  ['source/masks/mask.svg',            {:width => 128, :dest => 'web/128'}],
+  ['source/web/rainbow-masthead-small.svg', {:dest => 'web/masthead'}],
+  ['source/web/rainbow-masthead-centered.svg', {:dest => 'web/masthead'}],
+  ['source/web/rainbow-masthead-android-promo.svg', {:dest => 'web/masthead'}],
+  ['source/web/icons/*',               {:size => 32,  :dest => 'web/32'}],
+  ['source/web/icons/*',               {:size => 64,  :dest => 'web/64'}],
   
   # linux
-  ['svg/masks/mask-launcher.svg',   linux_target],
+  ['source/masks/mask-launcher.svg',   linux_target],
 
   # print
-  ['svg/letterhead/letterhead.svg', {:width => 2400, :height => 300, :dest => 'print'}]
+  ['source/letterhead/letterhead.svg', {:width => 2400, :height => 300, :dest => 'print'}]
 ]
 
 png_to_icns = [
   # mac
   ['mac/leap-128x128.png', {:dest => 'mac/leap.icns'}],
   ['mac/bitmask-128x128.png', {:dest => 'mac/bitmask.icns'}]
+]
+
+png_to_pngs = [
+  ['source/qr-codes/*.png', {:dest => 'web/qr'}]
 ]
 
 ##
@@ -175,6 +180,12 @@ def render_png_to_icns(source, targets)
   end
 end
 
+def copy_pngs(source, targets)
+  render_changed(source, targets) do |src_file, dest_file|
+    run("cp '#{src_file}' '#{dest_file}'")
+  end
+end
+
 #
 # for a source and target(s), yields (src_file, dest_file, info) for each
 # source and destination pair that needs rendering.
@@ -219,6 +230,9 @@ task :render do
     end
     png_to_icns.each do |sources, targets|
       render_png_to_icns(sources, targets)
+    end
+    png_to_pngs.each do |sources, targets|
+      copy_pngs(sources, targets)
     end
   end
   puts
