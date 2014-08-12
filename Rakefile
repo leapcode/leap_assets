@@ -14,11 +14,11 @@ output_directories = [
   'icons/white',
   'icons/black',
   'icons/white/16',
-  'icons/white/24',
+  'icons/white/22',
   'icons/white/32',
   'icons/white/64',
   'icons/black/16',
-  'icons/black/24',
+  'icons/black/22',
   'icons/black/32',
   'icons/black/64',
   'web',
@@ -60,14 +60,14 @@ android_icon_target = [
 
 white_icon_target = [
   {:size => 16, :dest => 'icons/white/16'},
-  {:size => 24, :dest => 'icons/white/24'},
+  {:size => 22, :dest => 'icons/white/22'},
   {:size => 32, :dest => 'icons/white/32'},
   {:size => 64, :dest => 'icons/white/64'}
 ]
 
 black_icon_target = [
   {:size => 16, :dest => 'icons/black/16'},
-  {:size => 24, :dest => 'icons/black/24'},
+  {:size => 22, :dest => 'icons/black/22'},
   {:size => 32, :dest => 'icons/black/32'},
   {:size => 64, :dest => 'icons/black/64'}
 ]
@@ -112,9 +112,7 @@ svg_to_raster = [
   # web  
   ['source/kid-jumping-bw.svg',        {:size => 16,  :dest => 'web/favicon.png'}],
   ['source/masks/mask.svg',            {:width => 128, :dest => 'web/128'}],
-  ['source/web/rainbow-masthead-small.svg', {:dest => 'web/masthead'}],
-  ['source/web/rainbow-masthead-centered.svg', {:dest => 'web/masthead'}],
-  ['source/web/rainbow-masthead-android-promo.svg', {:dest => 'web/masthead'}],
+  ['source/web/masthead/*.svg',        {:dest => 'web/masthead'}],
   ['source/web/icons/*',               {:size => 32,  :dest => 'web/32'}],
   ['source/web/icons/*',               {:size => 64,  :dest => 'web/64'}],
   
