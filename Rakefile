@@ -21,7 +21,9 @@ output_directories = [
   'icons/black/22',
   'icons/black/32',
   'icons/black/64',
+  'icons/logo',
   'web',
+  'web/22',
   'web/32',
   'web/64',
   'web/128',
@@ -88,14 +90,15 @@ svg_to_raster = [
   # icons
   ['source/icons/white/*.svg',         white_icon_target],
   ['source/icons/black/*.svg',         black_icon_target],
-  ['source/kid-jumping.svg',           {:width => 128, :dest => 'icons/leap-small.png'}],
-  ['source/kid-jumping.svg',           {:width => 64, :dest => 'icons/leap64.png'}],
+  ['source/leap/kid-square.svg',       {:size => 256,  :dest => 'icons/logo/leap256x256.png'}],
+  ['source/leap/kid-jumping.svg',      {:width => 128, :dest => 'icons/logo/leap128.png'}],
+  ['source/leap/kid-jumping.svg',      {:width => 64,  :dest => 'icons/logo/leap64.png'}],
   
   # android
   ['source/android/icons/*.svg',       android_icon_target],
   ['source/android/leap-launcher.svg', android_launcher_target],
   ['source/android/leap-launcher.svg', {:size => 512, :dest => 'android/leap-icon.png'}],
-  ['source/kid-jumping-silhouette-light.svg', android_icon_target],
+  ['source/leap/kid-jumping-silhouette-light.svg', android_icon_target],
   ['source/android/vpn_disconnected.svg', android_icon_target],
   ['source/android/vpn_progress.svg',  android_icon_target],
   ['source/android/leap-debug-launcher.svg', android_launcher_target],
@@ -110,16 +113,18 @@ svg_to_raster = [
   ['source/masks/mask-launcher.svg',   {:width => 32, :height => 26, :dest => 'mac/bitmask.tiff'}],
 
   # web  
-  ['source/kid-jumping-bw.svg',        {:size => 16,  :dest => 'web/favicon.png'}],
+  ['source/leap/kid-jumping-bw.svg',        {:size => 16,  :dest => 'web/favicon.png'}],
   ['source/masks/mask.svg',            {:width => 128, :dest => 'web/128'}],
   ['source/web/masthead/*.svg',        {:dest => 'web/masthead'}],
   ['source/web/icons/*',               {:size => 32,  :dest => 'web/32'}],
   ['source/web/icons/*',               {:size => 64,  :dest => 'web/64'}],
+  ['source/android/black/*.svg',       {:size => 22, :dest => 'web/22'}],
   
   # linux
   ['source/masks/mask-launcher.svg',   linux_target],
 
   # print
+  ['source/leap/kid-jumping.svg',           {:width => 1000, :dest => 'print/leap.png'}],
   ['source/letterhead/letterhead.svg', {:width => 2400, :height => 300, :dest => 'print'}]
 ]
 
