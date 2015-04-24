@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.48.5 r10040"
+   width="48"
+   height="48"
+   sodipodi:docname="vpn-on.svg"
+   inkscape:export-filename="/home/elijah/dev/leap/leap_assets/svg/android/vpn_connected-2.png"
+   inkscape:export-xdpi="90"
+   inkscape:export-ydpi="90">
+  <metadata
+     id="metadata8">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs6" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1871"
+     inkscape:window-height="1056"
+     id="namedview4"
+     showgrid="true"
+     inkscape:zoom="9.8333335"
+     inkscape:cx="19.127842"
+     inkscape:cy="10.893056"
+     inkscape:window-x="49"
+     inkscape:window-y="24"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg2"
+     inkscape:snap-global="false"
+     showguides="true"
+     inkscape:guide-bbox="true">
+    <inkscape:grid
+       type="xygrid"
+       id="grid3001" />
+    <sodipodi:guide
+       orientation="0,1"
+       position="14.453742,24.01766"
+       id="guide3773" />
+    <sodipodi:guide
+       orientation="1,0"
+       position="24.01766,29.123211"
+       id="guide3775" />
+  </sodipodi:namedview>
+  <path
+     sodipodi:type="arc"
+     style="fill:#689f38;fill-opacity:1;stroke:none"
+     id="path3003"
+     sodipodi:cx="20.530066"
+     sodipodi:cy="19.272289"
+     sodipodi:rx="16.71888"
+     sodipodi:ry="14.705423"
+     d="m 37.248945,19.272289 a 16.71888,14.705423 0 1 1 -33.4377592,0 16.71888,14.705423 0 1 1 33.4377592,0 z"
+     transform="matrix(1.3158776,0,0,1.4960467,-3.0150541,-4.8322446)" />
+  <path
+     style="fill:#ffffff;fill-opacity:1;stroke:none"
+     d="m 14.711682,14.310503 c -5.3358194,0 -9.6735152,4.324187 -9.6735152,9.673902 0,5.349714 4.3376958,9.698706 9.6735152,9.698706 4.210953,0 7.78147,-2.705774 9.104485,-6.474072 l 6.754143,-0.07442 1.385464,-1.661927 0.915397,-0.02481 1.451176,1.732607 0.979505,-0.02481 1.626752,-1.831826 0.890657,0 1.360724,1.761146 2.251382,0 1.70709,-3.150219 -2.2019,-3.249439 -17.14513,0 c -1.347429,-3.722533 -4.901461,-6.374853 -9.079745,-6.374853 z m -3.83477,7.06939 c 1.458175,0 2.647228,1.19215 2.647228,2.654121 0,1.461972 -1.189053,2.629317 -2.647228,2.629317 -1.458173,0 -2.6472275,-1.167345 -2.6472275,-2.629317 0,-1.461971 1.1890545,-2.654121 2.6472275,-2.654121 z"
+     id="path3017"
+     inkscape:connector-curvature="0"
+     sodipodi:nodetypes="ssscccccccccccccssssss" />
+</svg>
