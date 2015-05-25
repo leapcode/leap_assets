@@ -91,6 +91,7 @@ svg_to_raster = [
   ['source/icons/white/*.svg',         white_icon_target],
   ['source/icons/black/*.svg',         black_icon_target],
   ['source/leap/kid-square.svg',       {:size => 256,  :dest => 'icons/logo/leap256x256.png'}],
+  ['source/leap/kid-jumping.svg',      {:width => 200, :dest => 'icons/logo/leap200.png'}],
   ['source/leap/kid-jumping.svg',      {:width => 128, :dest => 'icons/logo/leap128.png'}],
   ['source/leap/kid-jumping.svg',      {:width => 64,  :dest => 'icons/logo/leap64.png'}],
   
