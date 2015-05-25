@@ -114,7 +114,8 @@ svg_to_raster = [
   ['source/masks/mask-launcher.svg',   {:width => 32, :height => 26, :dest => 'mac/bitmask.tiff'}],
 
   # web  
-  ['source/leap/kid-jumping-bw.svg',        {:size => 16,  :dest => 'web/favicon.png'}],
+  ['source/leap/kid-jumping-bw.svg',   {:size => 16,  :dest => 'web/favicon-bw.ico'}],
+  ['source/leap/kid-ico.svg',       {:size => 16,  :dest => 'web/favicon.ico'}],
   ['source/masks/mask.svg',            {:width => 128, :dest => 'web/128'}],
   ['source/web/masthead/*.svg',        {:dest => 'web/masthead'}],
   ['source/web/icons/*',               {:size => 32,  :dest => 'web/32'}],
@@ -172,7 +173,12 @@ def render_svg_to_raster(source, targets)
     run("inkscape #{options.join ' '}")
     run("optipng #{dest_file}")
     if filetype != '.png'
-      run("gm convert #{dest_file} #{real_dest_file}")
+      if filetype == '.ico'
+        # only imagemagick supports writing to .ico
+        run("convert #{dest_file} #{real_dest_file}")
+      else
+        run("gm convert #{dest_file} #{real_dest_file}")
+      end
       File.unlink(dest_file)
     end
   end
