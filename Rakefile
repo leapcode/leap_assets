@@ -109,10 +109,12 @@ svg_to_raster = [
   ['source/android/mask-silhouette.svg',	android_icon_target],
       
   # mac
-  ['source/android/leap-launcher.svg', {:size => 128, :dest => 'mac/leap-128x128.png'}],
-  ['source/masks/mask-launcher.svg',   {:size => 128, :dest => 'mac/bitmask-128x128.png'}],
-  ['source/masks/mask-launcher.svg',   {:width => 32, :height => 26, :dest => 'mac/bitmask.tiff'}],
-
+  ['source/masks/mask-launcher-flat.svg', {:size => 1024, :dest => 'mac/bitmask-1024x1024.png'}],
+  # I don't know what this was used for:
+  # ['source/masks/mask-launcher-flat.svg', {:width => 32, :height => 26, :dest => 'mac/bitmask.tiff'}],
+  ['source/statusbar/mac-menu-icon.svg', {:width => 22, :height => 21, :dest => 'mac/menubar-icon-22x21.png'}],
+  ['source/statusbar/mac-menu-icon.svg', {:width => 44, :height => 42, :dest => 'mac/menubar-icon-44x42.png'}],
+    
   # web  
   ['source/leap/kid-jumping-bw.svg',   {:size => 16,  :dest => 'web/favicon-bw.ico'}],
   ['source/leap/kid-ico.svg',       {:size => 16,  :dest => 'web/favicon.ico'}],
@@ -126,14 +128,13 @@ svg_to_raster = [
   ['source/masks/mask-launcher.svg',   linux_target],
 
   # print
-  ['source/leap/kid-jumping.svg',           {:width => 1000, :dest => 'print/leap.png'}],
+  ['source/leap/kid-jumping.svg',      {:width => 1000, :dest => 'print/leap.png'}],
   ['source/letterhead/letterhead.svg', {:width => 2400, :height => 300, :dest => 'print'}]
 ]
 
 png_to_icns = [
   # mac
-  ['mac/leap-128x128.png', {:dest => 'mac/leap.icns'}],
-  ['mac/bitmask-128x128.png', {:dest => 'mac/bitmask.icns'}]
+  ['mac/bitmask-1024x1024.png', {:dest => 'mac/bitmask.icns'}]
 ]
 
 png_to_pngs = [
