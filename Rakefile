@@ -94,28 +94,28 @@ svg_to_raster = [
   ['source/leap/kid-jumping.svg',      {:width => 200, :dest => 'icons/logo/leap200.png'}],
   ['source/leap/kid-jumping.svg',      {:width => 128, :dest => 'icons/logo/leap128.png'}],
   ['source/leap/kid-jumping.svg',      {:width => 64,  :dest => 'icons/logo/leap64.png'}],
-  
+
   # android
   ['source/android/icons/*.svg',       android_icon_target],
-  ['source/android/leap-launcher.svg', android_launcher_target],
-  ['source/android/leap-launcher.svg', {:size => 512, :dest => 'android/leap-icon.png'}],
-  ['source/leap/kid-jumping-silhouette-light.svg', android_icon_target],
-  ['source/android/vpn_disconnected.svg', android_icon_target],
-  ['source/android/vpn_progress.svg',  android_icon_target],
-  ['source/android/leap-debug-launcher.svg', android_launcher_target],
-  ['source/android/leap-debug-launcher.svg', {:size => 512, :dest => 'android/leap-debug-icon.png'}],
-  ['source/masks/mask-launcher.svg',   android_launcher_target],
-  ['source/masks/mask-icon.svg',       {:size => 512, :dest => 'android/bitmask-icon.png'}],
-  ['source/android/mask-silhouette.svg',	android_icon_target],
-      
+  #['source/android/leap-launcher.svg', android_launcher_target],
+  #['source/android/leap-launcher.svg', {:size => 512, :dest => 'android/leap-icon.png'}],
+  #['source/leap/kid-jumping-silhouette-light.svg', android_icon_target],
+  #['source/android/vpn_disconnected.svg', android_icon_target],
+  #['source/android/vpn_progress.svg',  android_icon_target],
+  #['source/android/leap-debug-launcher.svg', android_launcher_target],
+  #['source/android/leap-debug-launcher.svg', {:size => 512, :dest => 'android/leap-debug-icon.png'}],
+  ['source/masks/mask-launcher.svg',      android_launcher_target],
+  ['source/masks/mask-launcher.svg',      {:size => 512, :dest => 'android/hi-res-icon.png'}],
+  ['source/masks/feature-graphic.svg',    {:width => 1024, :height => 512, :dest => 'android/feature-graphic.png'}],
+  #['source/android/mask-silhouette.svg',	android_icon_target],
+
   # mac
-  ['source/masks/mask-launcher-flat.svg', {:size => 1024, :dest => 'mac/bitmask-1024x1024.png'}],
-  # I don't know what this was used for:
-  # ['source/masks/mask-launcher-flat.svg', {:width => 32, :height => 26, :dest => 'mac/bitmask.tiff'}],
-  ['source/statusbar/mac-menu-icon.svg', {:width => 22, :height => 21, :dest => 'mac/menubar-icon-22x21.png'}],
-  ['source/statusbar/mac-menu-icon.svg', {:width => 44, :height => 42, :dest => 'mac/menubar-icon-44x42.png'}],
-    
-  # web  
+  ['source/masks/mask-launcher.svg', {:size => 1024, :dest => 'mac/bitmask-1024x1024.png'}],
+  #['source/masks/mask-launcher-flat.svg', {:width => 32, :height => 26, :dest => 'mac/bitmask.tiff'}],
+  #['source/statusbar/mac-menu-icon.svg', {:width => 22, :height => 21, :dest => 'mac/menubar-icon-22x21.png'}],
+  #['source/statusbar/mac-menu-icon.svg', {:width => 44, :height => 42, :dest => 'mac/menubar-icon-44x42.png'}],
+
+  # web
   ['source/leap/kid-jumping-bw.svg',   {:size => 16,  :dest => 'web/favicon-bw.ico'}],
   ['source/leap/kid-ico.svg',       {:size => 16,  :dest => 'web/favicon.ico'}],
   ['source/masks/mask.svg',            {:width => 128, :dest => 'web/128'}],
@@ -123,7 +123,7 @@ svg_to_raster = [
   ['source/web/icons/*',               {:size => 32,  :dest => 'web/32'}],
   ['source/web/icons/*',               {:size => 64,  :dest => 'web/64'}],
   ['source/android/black/*.svg',       {:size => 22, :dest => 'web/22'}],
-  
+
   # linux
   ['source/masks/mask-launcher.svg',   linux_target],
 
@@ -137,8 +137,9 @@ png_to_icns = [
   ['mac/bitmask-1024x1024.png', {:dest => 'mac/bitmask.icns'}]
 ]
 
-png_to_pngs = [
-  ['source/qr-codes/*.png', {:dest => 'web/qr'}]
+copy = [
+  ['source/qr-codes/*.png', {:dest => 'web/qr'}],
+  ['source/masks/mask-launcher.svg', {:dest => 'linux/hicolor/scalable/apps/bitmask.svg'}]
 ]
 
 ##
@@ -191,7 +192,7 @@ def render_png_to_icns(source, targets)
   end
 end
 
-def copy_pngs(source, targets)
+def copy_files(source, targets)
   render_changed(source, targets) do |src_file, dest_file|
     run("cp '#{src_file}' '#{dest_file}'")
   end
@@ -242,8 +243,8 @@ task :render do
     png_to_icns.each do |sources, targets|
       render_png_to_icns(sources, targets)
     end
-    png_to_pngs.each do |sources, targets|
-      copy_pngs(sources, targets)
+    copy.each do |sources, targets|
+      copy_files(sources, targets)
     end
   end
   puts
