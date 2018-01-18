@@ -43,7 +43,11 @@ output_directories = [
   'linux/hicolor/256x256',
   'linux/hicolor/256x256/apps',
   'linux/hicolor/scalable',
-  'linux/hicolor/scalable/apps'
+  'linux/hicolor/scalable/apps',
+  'riseup',
+  'riseup/linux',
+  'riseup/mac',
+  'riseup/android'
 ]
 
 android_launcher_target = [
@@ -107,7 +111,7 @@ svg_to_raster = [
   ['source/masks/mask-launcher.svg',      android_launcher_target],
   ['source/masks/mask-launcher.svg',      {:size => 512, :dest => 'android/hi-res-icon.png'}],
   ['source/masks/feature-graphic.svg',    {:width => 1024, :height => 512, :dest => 'android/feature-graphic.png'}],
-  #['source/android/mask-silhouette.svg',	android_icon_target],
+  #['source/android/mask-silhouette.svg', android_icon_target],
 
   # mac
   ['source/masks/mask-launcher.svg', {:size => 1024, :dest => 'mac/bitmask-1024x1024.png'}],
@@ -133,7 +137,6 @@ svg_to_raster = [
 ]
 
 png_to_icns = [
-  # mac
   ['mac/bitmask-1024x1024.png', {:dest => 'mac/bitmask.icns'}]
 ]
 
@@ -141,6 +144,23 @@ copy = [
   ['source/qr-codes/*.png', {:dest => 'web/qr'}],
   ['source/masks/mask-launcher.svg', {:dest => 'linux/hicolor/scalable/apps/bitmask.svg'}]
 ]
+
+##
+## CUSTOM BRANDS
+##
+
+#
+# RiseupVPN
+#
+svg_to_raster += [
+  ['source/riseup/riseupvpn-launcher.svg',        {:size => 512, :dest => 'riseup/android/hi-res-icon.png'}],
+  ['source/riseup/riseupvpn-feature-graphic.svg', {:width => 1024, :height => 512, :dest => 'riseup/android/feature-graphic.png'}],
+  ['source/riseup/riseupvpn-launcher.svg',        {:size => 256, :dest => 'riseup/linux/riseupvpn.png'}],
+  ['source/riseup/riseupvpn-launcher.svg',        {:size => 1024, :dest => 'riseup/mac/riseupvpn.png'}]
+]
+png_to_icns << ['riseup/mac/riseupvpn.png', {:dest => 'riseup/mac/riseupvpn.icns'}]
+copy << ['source/riseup/riseupvpn-launcher.svg', {:dest => 'riseup/linux/riseupvpn.svg'}]
+
 
 ##
 ## HELPERS
