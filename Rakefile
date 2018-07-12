@@ -1,4 +1,11 @@
 ##
+## REQUIREMENTS:
+##
+## ruby
+## sudo apt install optipng icnsutils inkscape
+##
+
+##
 ## CONFIGURATION
 ##
 
@@ -47,7 +54,12 @@ output_directories = [
   'riseup',
   'riseup/linux',
   'riseup/mac',
-  'riseup/android'
+  'riseup/android',
+  'riseup/android/res',
+  'riseup/android/res/drawable-ldpi',
+  'riseup/android/res/drawable-mdpi',
+  'riseup/android/res/drawable-hdpi',
+  'riseup/android/res/drawable-xhdpi'
 ]
 
 android_launcher_target = [
@@ -152,7 +164,9 @@ copy = [
 #
 # RiseupVPN
 #
+riseup_android_launcher = android_launcher_target.map {|i| i = i.clone; i[:dest] = "riseup/" + i[:dest]; i}
 svg_to_raster += [
+  ['source/riseup/riseupvpn-launcher.svg',        riseup_android_launcher],
   ['source/riseup/riseupvpn-launcher.svg',        {:size => 512, :dest => 'riseup/android/hi-res-icon.png'}],
   ['source/riseup/riseupvpn-feature-graphic.svg', {:width => 1024, :height => 512, :dest => 'riseup/android/feature-graphic.png'}],
   ['source/riseup/riseupvpn-launcher.svg',        {:size => 256, :dest => 'riseup/linux/riseupvpn.png'}],
@@ -160,7 +174,6 @@ svg_to_raster += [
 ]
 png_to_icns << ['riseup/mac/riseupvpn.png', {:dest => 'riseup/mac/riseupvpn.icns'}]
 copy << ['source/riseup/riseupvpn-launcher.svg', {:dest => 'riseup/linux/riseupvpn.svg'}]
-
 
 ##
 ## HELPERS
